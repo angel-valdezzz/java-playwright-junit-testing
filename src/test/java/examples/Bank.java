@@ -8,7 +8,7 @@ package examples;
       Locator element(String id) { return page.locator("[id='"+id+"']"); }
       void home() { page.navigate(System.getenv().getOrDefault("PARABANK_URL","https://parabank.parasoft.com/parabank")+"/index.htm"); }
       void link(String text) { page.getByRole(com.microsoft.playwright.options.AriaRole.LINK,new Page.GetByRoleOptions().setName(text).setExact(true)).click(); }
-      void text(String selector,String expected) { assertThat(page.locator(selector)).hasText(expected); }
+      void text(String selector,String expected) { assertThat(page.locator(selector.equals("#rightPanel h1") ? selector+":visible" : selector)).hasText(expected); }
       void form(boolean mismatch) { home(); link("Register");
     element("customer.firstName").fill("Automation");element("customer.lastName").fill("Example");element("customer.address.street").fill("123 Fictional Street");element("customer.address.city").fill("Demo City");element("customer.address.state").fill("CA");element("customer.address.zipCode").fill("90210");element("customer.phoneNumber").fill("5551234567");element("customer.ssn").fill("123456789");
         element("customer.username").fill(username); element("customer.password").fill(password); element("repeatedPassword").fill(mismatch?"Different42!":password);
