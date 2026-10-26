@@ -3,7 +3,7 @@ package examples;
     import com.microsoft.playwright.*;
     import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
     public class Bank {
-      final Page page; final String username="qa"+UUID.randomUUID().toString().replace("-",""); final String password="DemoPass42!";
+      final Page page; final String username="qa"+UUID.randomUUID().toString().replace("-","").substring(0,18); final String password="DemoPass42!";
       Bank(Page page) { this.page=page; page.setDefaultTimeout(20000); }
       Locator element(String id) { return page.locator("[id='"+id+"']"); }
       void home() { page.navigate(System.getenv().getOrDefault("PARABANK_URL","https://parabank.parasoft.com/parabank")+"/index.htm"); }
